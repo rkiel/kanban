@@ -7,13 +7,13 @@ const cardsList = [
   {
     id: 1,
     title: 'Read the book',
-    description: 'I should read the whole book',
+    description: 'I should read the **whole** book',
     status: 'in-progress',
     tasks: []
   }, {
     id: 2,
     title: 'Write some code',
-    description: 'Come along with the samples in the book',
+    description: 'Come along with the samples in the book. [github](https://github.com/pro-react)',
     status: 'todo',
     tasks: [
       {
