@@ -9,12 +9,14 @@ const cardsList = [
     title: 'Read the book',
     description: 'I should read the **whole** book',
     status: 'in-progress',
+    color: '#BD8D31',
     tasks: []
   }, {
     id: 2,
     title: 'Write some code',
     description: 'Come along with the samples in the book. [github](https://github.com/pro-react)',
     status: 'todo',
+    color: '#3A7E28',
     tasks: [
       {
         id: 1,
