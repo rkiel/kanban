@@ -27,7 +27,7 @@ const cardsList = [
         name: 'Kanban example',
         done: false
       }, {
-        id: 1,
+        id: 3,
         name: 'My own experiments',
         done: false
       }
