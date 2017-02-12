@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import marked from 'marked';
 
 import CheckList from './CheckList.jsx';
@@ -51,5 +51,24 @@ class Card extends Component {
     );
   }
 }
+
+function titlePropType(props, propName, componentName) {
+  const value = props[propName];
+  if (value) {
+    if (typeof value !== 'string' || value.length > 80) {
+      return new Error(`${propName} in ${componentName} is longer than 80 characters`);
+    }
+  } else {
+    return new Error(`${propName} in ${componentName} is required`);
+  }
+}
+
+Card.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: titlePropType, //PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default Card;
