@@ -19,10 +19,7 @@ class KanbanBoardContainer extends Component {
     };
   }
   componentDidMount() {
-    fetch(API_CARDS, {headers: API_HEADERS}).then(response => {
-      console.log(response);
-      return response.json();
-    }).then(json => this.setState({cards: json}))
+    fetch(API_CARDS, {headers: API_HEADERS}).then(response => response.json()).then(json => this.setState({cards: json})).catch(error => console.log('error fetching and parsing data', error))
   }
   render() {
     return (<KanbanBoard cards={this.state.cards}/>);
