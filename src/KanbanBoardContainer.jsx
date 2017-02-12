@@ -21,8 +21,24 @@ class KanbanBoardContainer extends Component {
   componentDidMount() {
     fetch(API_CARDS, {headers: API_HEADERS}).then(response => response.json()).then(json => this.setState({cards: json})).catch(error => console.log('error fetching and parsing data', error))
   }
+  addTask(cardId, taskName) {
+    console.log("addTask");
+  }
+
+  deleteTask(cardId, taskId, taskIndex) {
+    console.log("deleteTask");
+  }
+
+  toggleTask(cardId, taskId, taskIndex) {
+    console.log("toggleTask");
+  }
+
   render() {
-    return (<KanbanBoard cards={this.state.cards}/>);
+    return (<KanbanBoard cards={this.state.cards} taskCallbacks={{
+      toggle: this.toggleTask.bind(this),
+      delete: this.deleteTask.bind(this),
+      add: this.addTask.bind(this)
+    }}/>);
   }
 }
 
