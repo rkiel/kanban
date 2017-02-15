@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 const API_URL = 'http://kanbanapi.pro-react.com';
 const API_CARDS = API_URL + '/cards';
 
