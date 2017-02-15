@@ -4,7 +4,12 @@ import {connect} from 'react-redux';
 
 import List from './List.jsx';
 
+import {loadAndAddCards} from './actions';
+
 class KanbanBoard extends Component {
+  componentDidMount() {
+    this.props.loadAndAddCards();
+  }
   render() {
     const todos = this.props.cards.filter(card => card.status === 'todo');
     const inProgress = this.props.cards.filter(card => card.status === 'in-progress');
@@ -26,4 +31,9 @@ function mapStateToProps(state) {
   return {cards: state.cards};
 }
 
-export default connect(mapStateToProps)(KanbanBoard);
+function mapDispatchToProps(dispatch) {
+  return {
+    loadAndAddCards: () => dispatch(loadAndAddCards())
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(KanbanBoard);

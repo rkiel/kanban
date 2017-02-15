@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {addTask, deleteTask, toggleTask} from './actions';
+import {saveAndAddTask, deleteTask, toggleTask} from './actions';
 
 class CheckList extends Component {
   checkInputKeyPress(evt) {
@@ -39,7 +39,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addTask: (cardId, value) => dispatch(addTask(cardId, value)),
+    addTask: (cardId, value) => dispatch(saveAndAddTask(cardId, value)),
     deleteTask: (cardId, taskId, taskIndex) => dispatch(deleteTask(cardId, taskId, taskIndex)),
     toggleTask: (cardId, taskId, taskIndex) => dispatch(toggleTask(cardId, taskId, taskIndex))
   }

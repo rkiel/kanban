@@ -13,34 +13,6 @@ const API_HEADERS = {
 };
 
 class KanbanBoardContainer extends Component {
-  componentDidMount() {
-    fetch(API_CARDS, {headers: API_HEADERS}).then(response => response.json()).then(json => this.setState({cards: json})).catch(error => console.log('error fetching and parsing data', error))
-  }
-
-  addTask(cardId, taskName) {
-    const cardIndex = this.state.cards.findIndex(card => card.id === cardId);
-    const newTask = {
-      id: Date.now(),
-      name: taskName,
-      done: false
-    };
-    const nextState = update(this.state.cards, {
-      [cardIndex]: {
-        tasks: {
-          $push: [newTask]
-        }
-      }
-    });
-    //    this.setState({cards: nextState});
-    fetch(`${API_CARDS}/${cardId}/tasks`, {
-      method: 'post',
-      headers: API_HEADERS,
-      body: JSON.stringify(newTask)
-    }).then(response => response.json()).then(responseData => {
-      newTask.id = responseData.id;
-      this.setState({cards: nextState});
-    });
-  }
 
   deleteTask(cardId, taskId, taskIndex) {
     const cardIndex = this.state.cards.findIndex(card => card.id === cardId);

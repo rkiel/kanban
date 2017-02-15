@@ -1,39 +1,25 @@
 import {combineReducers} from 'redux';
 import update from 'immutability-helper';
 
-function initialState() {
-  return [
-    {
-      id: 1,
-      title: "foo",
-      description: "bar",
-      status: 'in-progress',
-      color: "blue",
-      tasks: []
-    }
-  ]
-}
-
-function cardsReducer(state = initialState(), action) {
+function cardsReducer(state = [], action) {
   let cardIndex;
+  console.log("TASK", action);
+
   switch (action.type) {
+    case 'ADD_CARDS':
+      return update(state, {$push: action.cards});
+
     case 'ADD_TASK':
-      console.log("add task", action);
       cardIndex = state.findIndex(card => card.id === action.cardId);
-      const newTask = {
-        id: Date.now(),
-        name: action.taskName,
-        done: false
-      };
       return update(state, {
         [cardIndex]: {
           tasks: {
-            $push: [newTask]
+            $push: [action.newTask]
           }
         }
       });
+
     case 'DELETE_TASK':
-      console.log("delete task", action);
       cardIndex = state.findIndex(card => card.id === action.cardId);
       return update(state, {
         [cardIndex]: {
@@ -46,7 +32,6 @@ function cardsReducer(state = initialState(), action) {
       });
 
     case 'TOGGLE_TASK':
-      console.log("toggle task", action);
       cardIndex = state.findIndex(card => card.id === action.cardId);
       return update(state, {
         [cardIndex]: {
