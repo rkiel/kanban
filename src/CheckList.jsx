@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+
+import {addTask, deleteTask, toggleTask} from './actions';
 
 class CheckList extends Component {
   checkInputKeyPress(evt) {
     if (evt.key === 'Enter') {
-      this.props.taskCallbacks.add(this.props.cardId, evt.target.value);
+      this.props.addTask(this.props.cardId, evt.target.value);
       evt.target.value = '';
     }
   }
@@ -11,8 +14,8 @@ class CheckList extends Component {
     const tasks = this.props.tasks.map((task, taskIndex) => {
       return (
         <li key={task.id} className="checklist__list">
-          <input type="checkbox" defaultChecked={task.done} onChange={this.props.taskCallbacks.toggle.bind(null, this.props.cardId, task.id, taskIndex)}/> {task.name}{' '}
-          <a href="#" className="checklist__task--remove" onClick={this.props.taskCallbacks.delete.bind(null, this.props.cardId, task.id, taskIndex)}/>
+          <input type="checkbox" defaultChecked={task.done} onChange={this.props.toggleTask.bind(null, this.props.cardId, task.id, taskIndex)}/> {task.name}{' '}
+          <a href="#" className="checklist__task--remove" onClick={this.props.deleteTask.bind(null, this.props.cardId, task.id, taskIndex)}/>
         </li>
       );
     });
@@ -27,8 +30,19 @@ class CheckList extends Component {
 
 CheckList.propTypes = {
   cardId: PropTypes.number.isRequired,
-  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  taskCallbacks: PropTypes.object.isRequired
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export default CheckList;
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addTask: (cardId, value) => dispatch(addTask(cardId, value)),
+    deleteTask: (cardId, taskId, taskIndex) => dispatch(deleteTask(cardId, taskId, taskIndex)),
+    toggleTask: (cardId, taskId, taskIndex) => dispatch(toggleTask(cardId, taskId, taskIndex))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckList);

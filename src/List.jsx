@@ -5,7 +5,7 @@ import Card from './Card.jsx';
 class List extends Component {
   render() {
     const cards = this.props.cards.map(card => {
-      return (<Card key={card.id} taskCallbacks={this.props.taskCallbacks} {...card}/>)
+      return (<Card key={card.id} {...card}/>)
     });
     return (
       <div className="list">
@@ -18,8 +18,7 @@ class List extends Component {
 
 List.propTypes = {
   title: PropTypes.string.isRequired,
-  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
-  taskCallbacks: PropTypes.object.isRequired
+  cards: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default List;

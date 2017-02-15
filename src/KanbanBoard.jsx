@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import {connect} from 'react-redux';
+
 import List from './List.jsx';
 
 class KanbanBoard extends Component {
@@ -10,17 +12,18 @@ class KanbanBoard extends Component {
 
     return (
       <div className="app">
-        <List id="todo" title="To Do" cards={todos} taskCallbacks={this.props.taskCallbacks}/>
-        <List id="in-progress" title="In Progress" cards={inProgress} taskCallbacks={this.props.taskCallbacks}/>
-        <List id="done" title="Done" cards={dones} taskCallbacks={this.props.taskCallbacks}/>
+        <List id="todo" title="To Do" cards={todos}/>
+        <List id="in-progress" title="In Progress" cards={inProgress}/>
+        <List id="done" title="Done" cards={dones}/>
       </div>
     )
   }
 }
 
-KanbanBoard.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
-  taskCallbacks: PropTypes.object.isRequired
-};
+KanbanBoard.propTypes = {};
 
-export default KanbanBoard;
+function mapStateToProps(state) {
+  return {cards: state.cards};
+}
+
+export default connect(mapStateToProps)(KanbanBoard);

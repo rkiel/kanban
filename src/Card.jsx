@@ -20,7 +20,7 @@ class Card extends Component {
           <span dangerouslySetInnerHTML={{
             __html: marked(this.props.description)
           }}/>
-          <CheckList cardId={this.props.id} tasks={this.props.tasks} taskCallbacks={this.props.taskCallbacks}/>
+          <CheckList cardId={this.props.id} tasks={this.props.tasks}/>
         </div>
       );
     }
@@ -68,8 +68,7 @@ Card.propTypes = {
   title: titlePropType, //PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  taskCallbacks: PropTypes.object.isRequired
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default Card;
