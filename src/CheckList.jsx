@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {saveAndAddTask, deleteTask, toggleTask} from './actions';
+import {saveAndAddTask, deleteAndRemoveTask, toggleAndUpdateTask} from './actions';
 
 class CheckList extends Component {
   checkInputKeyPress(evt) {
@@ -14,7 +14,7 @@ class CheckList extends Component {
     const tasks = this.props.tasks.map((task, taskIndex) => {
       return (
         <li key={task.id} className="checklist__list">
-          <input type="checkbox" defaultChecked={task.done} onChange={this.props.toggleTask.bind(null, this.props.cardId, task.id, taskIndex)}/> {task.name}{' '}
+          <input type="checkbox" defaultChecked={task.done} onChange={this.props.toggleTask.bind(null, this.props.cardId, task.id, task.done, taskIndex)}/> {task.name}{' '}
           <a href="#" className="checklist__task--remove" onClick={this.props.deleteTask.bind(null, this.props.cardId, task.id, taskIndex)}/>
         </li>
       );
@@ -40,8 +40,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addTask: (cardId, value) => dispatch(saveAndAddTask(cardId, value)),
-    deleteTask: (cardId, taskId, taskIndex) => dispatch(deleteTask(cardId, taskId, taskIndex)),
-    toggleTask: (cardId, taskId, taskIndex) => dispatch(toggleTask(cardId, taskId, taskIndex))
+    deleteTask: (cardId, taskId, taskIndex) => dispatch(deleteAndRemoveTask(cardId, taskId, taskIndex)),
+    toggleTask: (cardId, taskId, taskDone, taskIndex) => dispatch(toggleAndUpdateTask(cardId, taskId, !taskDone, taskIndex))
   }
 }
 

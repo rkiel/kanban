@@ -3,7 +3,6 @@ import update from 'immutability-helper';
 
 function cardsReducer(state = [], action) {
   let cardIndex;
-  console.log("TASK", action);
 
   switch (action.type) {
     case 'ADD_CARDS':
@@ -39,7 +38,7 @@ function cardsReducer(state = [], action) {
             [action.taskIndex]: {
               done: {
                 $apply: done => {
-                  return !done;
+                  return action.taskDone;
                 }
               }
             }
